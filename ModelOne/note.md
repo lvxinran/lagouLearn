@@ -31,3 +31,7 @@ Mybatis插件其实都是实现了interceptor接口，都是拦截器。
 架构分为3部分，接口层，数据处理层，框架支撑层。
 
 总体流程为4步。加载配置初始化，接受调用请求，处理请求，返回结果。
+
+Executor将配置文件解析成MapperStatment，内部调用jdbc使用StatementHandler实现
+
+StatementHandler内流程为先调用paramHandler处理BoundSql传入的参数，然后使用TypeHandler对参数和jdbcTyep类型进行对应，最后生成statment对象 执行query方法返回结果集，结果集使用TypeHandler进行解析成java对象，然后ResultHandler进行对结果集最后的封装，返回list。
