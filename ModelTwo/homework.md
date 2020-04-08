@@ -119,7 +119,7 @@ public static void init(){
 
 接下来进行一次update操作
 
-![image-20200408152311980](image-20200408152311980.png)
+![image-20200408152311980](https://github.com/lvxinran/lagouLearn/blob/master/ModelTwo/image-20200408152311980.png)
 
 这里使用了MyTransactional注解和动态代理实现了对事物的控制
 
@@ -145,4 +145,4 @@ public void transfer(String fromCardNo, String toCardNo, int money) throws Excep
 
 2、根据源码剖析，记录spring循环依赖处理机制中的调用关系，画出uml时序图
 
-![circleIndependence](circleIndependence.png)
+![circleIndependence](https://github.com/lvxinran/lagouLearn/blob/master/ModelTwo/circleIndependence.png)
