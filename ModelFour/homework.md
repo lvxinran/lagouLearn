@@ -8,11 +8,11 @@
 
 1、首先使用**localhost:8080/show**访问主页（注：此处使用重定向技术，自动跳转到/main?page=1第一页，使用flash方式）
 
-![image-20200423165820073](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200423165820073.png)
+![image-20200423165820073](https://github.com/lvxinran/lagouLearn/blob/master/ModelFour/image-20200423165820073.png)
 
 每页条数在application.properties里面设置，可以更改，使用@Value注解实现，在Page对象中设置，不是写死的
 
-![image-20200423165933899](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200423165933899.png)
+![image-20200423165933899](https://github.com/lvxinran/lagouLearn/blob/master/ModelFour/image-20200423165933899.png)
 
 2、如果为第一页，则上一页和首页不可点击，如果为最后一页，则下一页和尾页不可点击
 
