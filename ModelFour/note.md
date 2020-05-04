@@ -423,4 +423,36 @@ ${...} 变量表达式 *{...}选择变量表达式 #{...}消息表达式 @{...} 
 
 ### 缓存管理
 
- 
+#### @EnableCaching 
+
+开启基于注解的缓存支持，配置在项目启动类上
+
+#### @Cacheable 
+
+将方法查询结果尊放在springboot默认缓存中，作用在类或方法上
+
+(cacheNames/value="") 缓存命名空间 对应缓存唯一标识
+
+ 不会再发送sql语句
+
+底层结构：默认装配SimpleCacheConfiguration--->ConcurrentMapCacheManager(里面有一个Map value为缓存结果，key只有一个参数时，为方法参数值；如果没有或者多个参数会使用simpleKeyGenerate去生成Key)
+
+方法执行前，先去cache中查找根据cacheNames，找不到就去数据库查找创建
+
+#### @CachePut
+
+先执行方法，多用于更改，更新之后把修改数据返回放入缓存中。
+
+#### @CacheEvict
+
+多用于删除数据，先调用方法，后对缓存进行删除
+
+### 整合Redis实现缓存
+
+支持的缓存组件
+
+依赖于Cache接口和CacheManager接口
+
+推荐使用Redis
+
+#### 自定义序列化方式
