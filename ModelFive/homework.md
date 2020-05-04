@@ -17,13 +17,13 @@ public static void main(String[] args) throws Exception {
 
 2、浏览器访问http://localhost:8080/Web_Test_war/app
 
-![image-20200504181953788](\image-20200504181953788.png)
+![image-20200504181953788](https://github.com/lvxinran/lagouLearn/blob/master/ModelFive/image-20200504181953788.png)
 
 
 
 控制台输出
 
-![image-20200504182023720](\image-20200504182023720.png)
+![image-20200504182023720](https://github.com/lvxinran/lagouLearn/blob/master/ModelFive/image-20200504182023720.png)
 
 输出为自定义的servlet的打印
 
@@ -95,7 +95,7 @@ public static void main(String[] args) throws Exception {
 
    具体测试可修改server.xml下的配置，项目结构如下
 
-   ![image-20200504182416899](\image-20200504182416899.png)
+   ![image-20200504182416899](https://github.com/lvxinran/lagouLearn/blob/master/ModelFive/image-20200504182416899.png)
 
 ## 作业⼆（简答题）： 请详细描述Tomcat体系结构（图⽂并茂）
 
@@ -105,7 +105,7 @@ Tomcat总体由两大部分组成：连接器、容器
 
 容器用来接受连接器的请求对象，实现业务逻辑，返回响应
 
-![Tomcat整体流程](\Tomcat整体流程.png)
+![Tomcat整体流程](https://github.com/lvxinran/lagouLearn/blob/master/ModelFive/Tomcat%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B.png)
 
 Catalina容器中又类似嵌套模式分别由Engine、Host、Context、Wrapper组成（根据server.xml标签嵌套可看出逻辑关系）
 
@@ -115,4 +115,4 @@ Server标签下有多个Service标签
 
 一个Engine对应多个Host、Context、Wrapper嵌套式。
 
-![Tomcat内部结构](\Tomcat内部结构.png)
+![Tomcat内部结构](https://github.com/lvxinran/lagouLearn/blob/master/ModelFive/Tomcat%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png)
