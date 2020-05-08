@@ -305,7 +305,62 @@ Nginx做什么
 
 请求到来时，Nginx根据请求找到一个原始服务器来处理请求，如果服务器有多台找哪个服务器，这个就是负载均衡。
 
+### Nginx配置文件
 
+核心配置文件conf/nginx.conf包含三块：全局快，events块。http块
 
+全局块：worker_process worker进程数量		pid 主进程pid值路径
 
+events块：影响服务器和用户的网络连接  worker_connections  每个worker进程处理多少个链接
+
+http块：处理http请求相关 server 配置虚拟主机 ----> listen 监听端口 
+		 server_name  设置虚拟主机名字 
+		 locational  默认请求
+				 proxy_pass 转发请求路径 http://127.0.0:8080/（用来配置反向代理，多个location对应多个host）
+
+### Nginx负载均衡
+
+配置：http下面 配置upstream
+
+upstream lxrServer{
+
+​	server 127.0.0.1:8080;
+
+​	server 127.0.0.1:8082;
+
+}
+
+然后再location中添加 proxy_class http://lxrServer/;
+
+#### 负载均衡策略：
+
+轮询（默认策略）：轮着访问
+
+权重：server 127.0.0.1:8080 weight = 1;
+
+ip_hash：按照ip的hash结果分配，可以解决session问题
+
+### 动静分离
+
+location /static{
+
+​	root static 
+
+}
+
+### 进程模型
+
+master进程 负责管理worker进程
+
+worker进程 用来执行工作的进程，处理网络请求，可以有多个worker，一个请求被一个worker进程处理
+
+客户端向nginx 需要两个连接   nginx想tomcat连接时也需要两个 因此 最大并发数为worker*worker_process/4
+
+### 热加载
+
+### 多进程
+
+每个worker进程都是独立的不需要加锁
+
+先新建，把旧的worker任务执行完毕之后，再销毁
 
