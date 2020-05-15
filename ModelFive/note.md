@@ -315,7 +315,7 @@ events块：影响服务器和用户的网络连接  worker_connections  每个w
 
 http块：处理http请求相关 server 配置虚拟主机 ----> listen 监听端口 
 		 server_name  设置虚拟主机名字 
-		 locational  默认请求
+		 location  默认请求
 				 proxy_pass 转发请求路径 http://127.0.0:8080/（用来配置反向代理，多个location对应多个host）
 
 ### Nginx负载均衡
