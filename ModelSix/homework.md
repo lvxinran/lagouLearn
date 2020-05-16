@@ -37,16 +37,16 @@
 
 1. 多个服务器节点同时开启，但只用其中一个定时任务程序在执行
 
-![image-20200514210302729](https://github.com/lvxinran/lagouLearn/blob/master/ModelSix/%E4%BD%9C%E4%B8%9A%E6%96%87%E4%BB%B6/image-20200514210302729.png)
+![image-20200514210302729](./作业文件/image-20200514210302729.png)
 
 如果正在执行的断开，就会使用其他的节点进行任务处理
 
-![image-20200514210404905](https://github.com/lvxinran/lagouLearn/blob/master/ModelSix/%E4%BD%9C%E4%B8%9A%E6%96%87%E4%BB%B6/image-20200514210404905.png)
+![image-20200514210404905](./作业文件/image-20200514210404905.png)
 
 ​	2.任务可以进行分片，把大的任务分解成小的任务，放在多个服务器去执行
 
-![image-20200515095133642](https://github.com/lvxinran/lagouLearn/blob/master/ModelSix/%E4%BD%9C%E4%B8%9A%E6%96%87%E4%BB%B6/image-20200515095133642.png)
+![image-20200515095133642](./作业文件/image-20200515095133642.png)
 
 在节点断开之后仍然可以使用其他实例进行task的执行
 
-![image-20200515095422482](https://github.com/lvxinran/lagouLearn/blob/master/ModelSix/%E4%BD%9C%E4%B8%9A%E6%96%87%E4%BB%B6/image-20200515095422482.png)
+![image-20200515095422482](./作业文件/image-20200515095422482.png)
