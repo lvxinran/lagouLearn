@@ -34,7 +34,7 @@ public class RpcConsumer {
         request.setClassName(UserService.class.getCanonicalName());
         request.setMethodName("sayHello");
         request.setParameterTypes(new Class[]{String.class});
-        request.setParameters(new Object[]{"112345"});
+        request.setParameters(new Object[]{"客户端参数"});
         return
                 Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
                         new Class<?>[]{serviceClass}, (proxy, method, args) -> {
