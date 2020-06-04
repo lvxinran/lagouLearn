@@ -8,8 +8,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.data.Stat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
 
 import java.lang.reflect.Method;
 
@@ -37,7 +36,7 @@ public class UserServerHandler extends ChannelInboundHandlerAdapter {
         request.setParameters(new Object[]{result});
         ctx.writeAndFlush(request);
         long endTime = System.currentTimeMillis();
-        long responseTime = endTime - startTime;
+        long responseTime = endTime - startTime+(int)(Math.random()*5);
         String s = responseTime + "&" + endTime;
         CuratorFramework client = ServerBootStrap.getClient();
         Stat stat = client.setData().forPath("/" + ServerBootStrap.getAddress() + "/" + ServerBootStrap.getPort(),s.getBytes());

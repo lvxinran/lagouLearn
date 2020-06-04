@@ -53,7 +53,7 @@ public class ServerBootStrap {
     }
 
     public static void createSession() throws Exception {
-        String server = "服务端节点";
+        String server = "";
         client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL)
                 .forPath("/"+address+"/"+port,server.getBytes());
     }
