@@ -108,7 +108,7 @@ public class RpcConsumer {
                             System.out.println("儿子节点添加" + pathChildrenCacheEvent.getData());
                             break;
                         case CHILD_UPDATED:
-                            System.out.println("儿子节点发生了更新  " + pathChildrenCacheEvent.getData());
+                            System.out.println("儿子节点发生了更新  " + pathChildrenCacheEvent.getData().getPath());
                             break;
                         case CHILD_REMOVED:
                             String removePath = pathChildrenCacheEvent.getData().getPath();
@@ -148,20 +148,49 @@ public class RpcConsumer {
     public static final Map<Integer, ChannelFuture> getChannel(String host, Set<Integer> ports) throws Exception {
         Map<Integer, ChannelFuture> result = new HashMap<>();
         getBootstrap(null);
-        for (int  port: ports) {
-            bootstrap.remoteAddress(host, port);
-            //异步连接tcp服务端
-            ChannelFuture future = bootstrap.connect().addListener((ChannelFuture futureListener) -> {
-                final EventLoop eventLoop = futureListener.channel().eventLoop();
-                if (!futureListener.isSuccess()) {
-                    //服务器未启动 连接tcp服务器不成功
-                    System.out.println(port + "第一次连接与服务端断开连接!在10s之后准备尝试重连!");
-                    //10秒后重连
-                    eventLoop.schedule(() -> doConnect(bootstrap, host, port), 10, TimeUnit.SECONDS);
+
+        int responseTime = 0;
+        long endTime = 0;
+        int port = 0;
+        for (int  tempPort: ports) {
+            String s =new String(curator.getData().forPath("/" + host + "/" + tempPort));
+            if(s.isEmpty()){
+                port = tempPort;
+                System.out.println(port+"无连接信息，优先连接");
+                break;
+            }
+            endTime = Long.parseLong(s.split("&")[1]);
+            if(System.currentTimeMillis()-endTime>5000){
+                port = tempPort;
+                System.out.println(port+"连接信息大于5s，优先连接");
+                break;
+            }
+            int resTime = Integer.parseInt(s.split("&")[0]);
+            if(responseTime==0){
+                responseTime =resTime;
+                System.out.println("响应时间"+responseTime);
+                port = tempPort;
+            }else{
+                if(resTime <responseTime){
+                    System.out.println(port+"响应时间较小，优先选择");
+                    port = tempPort;
                 }
-            });
-            result.put(port, future);
+            }
         }
+        System.out.println("最终连接使用："+port);
+        bootstrap.remoteAddress(host, port);
+        //异步连接tcp服务端
+        int finalPort = port;
+        ChannelFuture future = bootstrap.connect().addListener((ChannelFuture futureListener) -> {
+            final EventLoop eventLoop = futureListener.channel().eventLoop();
+            if (!futureListener.isSuccess()) {
+                //服务器未启动 连接tcp服务器不成功
+                System.out.println(finalPort + "第一次连接与服务端断开连接!在10s之后准备尝试重连!");
+                //10秒后重连
+                eventLoop.schedule(() -> doConnect(bootstrap, host, finalPort), 10, TimeUnit.SECONDS);
+            }
+        });
+        result.put(port, future);
         return result;
     }
     public static void doConnect(Bootstrap bootstrap , String host, int port) {
