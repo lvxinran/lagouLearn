@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.min.js"></script>
+
+</head>
+<body>
+<form id="form1" onsubmit="return false" action="##" method="post">
+    <p>用户名：<input name="email" type="text" id="email" tabindex="1" size="15" value=""/></p>
+    <p>密　码：<input name="password" type="password" id="password" tabindex="2" size="16" value=""/></p>
+	<p>验证码：<input name="code" type="text" id="code" tabindex="2" size="16" value=""/></p>
+
+    <span id="errorRegister" style="color: red;display: none" > 验证码错误或已经注册该账号 </span>
+    <p><input type="button" value="注册" onclick="register()">
+</form>
+<div>
+    <button type="button" class="btn btn-info"  id="second">点击获取验证码</button>
+</div>
+</body>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+
+    $("#second").click(function (){
+        setTime($("#second"));
+    });
+    var countdown = 60;
+    function setTime(obj) {
+        if (countdown == 0) {
+            obj.prop('disabled', false);
+            obj.text("点击获取验证码");
+            countdown = 60;//60秒过后button上的文字初始化,计时器初始化;
+            return;
+        } else {
+			if(countdown==60){
+			    sendCode();
+			}
+            obj.prop('disabled', true);
+            obj.text("("+countdown+"s)后重新发送") ;
+            countdown--;
+        }
+        setTimeout(function() { setTime(obj) },1000) //每1000毫秒执行一次
+    }
+    function sendCode() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "GET",//方法类型
+            dataType: "text",//预期服务器返回的数据类型
+            url: "http://localhost/api/code/create" ,//url
+            data: {email:$("#email").val()},
+            success: function (result) {
+                console.log(result);
+            },
+            error:function (re) {
+                console.log("gg")
+            }
+
+        });
+        
+    }
+
+    function register() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "text",//预期服务器返回的数据类型
+            url: "http://localhost/api/user/register" ,//url
+            data: $('#form1').serialize(),
+            success: function (result) {
+				var resultNum = parseInt(result);
+                console.log(result);
+                if(resultNum==0){
+                    window.location.href = 'http://localhost/static/welcome.html';
+                }else{
+					if(resultNum==-1){
+						$('#errorRegister').html("该邮箱已被注册");
+					}else if(resultNum==1){
+						$('#errorRegister').html("验证码错误");
+					}else{
+						$('#errorRegister').html("验证码已过期");
+					}
+                    $('#errorRegister').show();
+                }
+
+            },
+            error:function (re) {
+                console.log("gg")
+            }
+
+        });
+    }
+
+
+</script>
+

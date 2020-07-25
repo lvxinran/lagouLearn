@@ -1,0 +1,8 @@
+GET http://localhost:20010/{POST%20/api/user/login}
+
+###
+
+GET http://localhost:20010/{GET%20/user/login/{email}/{password}}
+
+###
+

@@ -1,0 +1,13 @@
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://SpringCloudEurekaServer8090:8090/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+spring:
+  application:
+    name: EmailApplicaion
+server:
+  port: 8082
