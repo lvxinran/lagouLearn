@@ -1,0 +1,13 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: SpringCloudEurekaServer
+eureka:
+  instance:
+    hostname: SpringCloudEurekaServer8091
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://SpringCloudEurekaServer8090:8090/eureka/

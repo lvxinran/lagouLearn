@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="SpreingCloud-GateWay" />
+        <module name="SpreingCloudGateWay" />
+        <module name="SpringCloud-Enurka8090" />
+        <module name="SpringCloud-Eureka8091" />
+        <module name="SpringCloud-Service-Code" />
+        <module name="SpringCloud-Service-Email" />
+        <module name="SpringCloud-Service-User" />
+        <module name="SpringCloudEureka8090" />
+        <module name="SpringCloudEureka8091" />
+        <module name="SpringCloudServiceCode" />
+        <module name="SpringCloudServiceEmail" />
+        <module name="SpringCloudServiceUser" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: CodeApplicaion
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+#避免将驼峰命名转换为下划线命名
+

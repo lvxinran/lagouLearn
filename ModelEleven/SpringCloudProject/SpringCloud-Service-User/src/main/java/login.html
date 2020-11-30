@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.min.js"></script>
+
+</head>
+<body>
+<form id="form1" onsubmit="return false" action="##" method="post">
+    <p>用户名：<input name="email" type="text" id="email" tabindex="1" size="15" value=""/></p>
+    <p>密　码：<input name="password" type="password" id="password" tabindex="2" size="16" value=""/></p>
+    <span id="errorLogin" style="color: red;display: none" > </span>
+    <p><input type="button" value="登录" onclick="login()">
+</form>
+</body>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+
+    function login() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "text",//预期服务器返回的数据类型
+            url: "http://localhost/api/user/login" ,//url
+            data: $('#form1').serialize(),
+            success: function (result) {
+                var resultInt = parseInt(result);
+                if(result<0){
+                    if(resultInt===-1){
+                        $("#errorLogin").html("此邮箱没注册！")
+                    }else{
+                        $("#errorLogin").html("密码不正确！")
+                    }
+                    $("#errorLogin").show();
+                }else{
+                    window.location.href = 'http://localhost/static/welcome.html';
+                }
+
+            },
+            error:function (re) {
+                console.log("gg")
+            }
+
+        });
+    }
+
+
+</script>
+
